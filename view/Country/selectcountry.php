@@ -1,7 +1,7 @@
 <?php
-    use Models\Country;
-    $objCountry = new Country();
-    $_DATA=json_encode($objCountry->loadAllData());
+    use Models\Pais;
+    $objPais = new Pais();
+    $_DATA=json_encode($objPais->loadAllData());
 ?>
 <section>
   <h1 >Listado de Paises</h1>
@@ -24,8 +24,8 @@
         data: datos,
         pageLength: 2,
         columns: [
-                    { data: 'id_country' },
-                    { data: 'name_country' }
+                    { data: 'idPais' },
+                    { data: 'nombrePais' }
         ],
         language: {
             

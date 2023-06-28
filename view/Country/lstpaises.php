@@ -1,6 +1,6 @@
 <?php 
-        use Models\Country;  
-        $objCountry =new Country();
+        use Models\Pais;  
+        $objPais =new Pais();
 ?>
 
 <section>
@@ -14,10 +14,10 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($objCountry->loadAllData() as $pais): ?>
+            <?php foreach ($objPais->loadAllData() as $pais): ?>
                     <tr>
-                                <td><?php echo $pais['id_country']; ?></td>
-                                <td><?php echo $pais['name_country']; ?></td>
+                                <td><?php echo $pais['idPais']; ?></td>
+                                <td><?php echo $pais['nombrePais']; ?></td>
                     </tr>
             <?php endforeach; ?>            
         </tbody>

@@ -1,13 +1,13 @@
 <?php
 
-use Models\Country;
+use Models\Pais;
 
-$objCountry = new Country();
+$objPais = new Pais();
 // Recargar la página actual
-global $idCountry;
-function setIdCountry($id)
+global $idPais;
+function setidPais($id)
 {
-    $idCountry = $id;
+    $idPais = $id;
 }
 ?>
 <script src="js/Bootstrap/bootstrap.min.js"></script>
@@ -22,10 +22,10 @@ function setIdCountry($id)
                     <th rowspan="1" colspan="1"></th>
             </thead>
             <tbody>
-                <?php foreach ($objCountry->loadAllData() as $pais) : ?>
+                <?php foreach ($objPais->loadAllData() as $pais) : ?>
                     <tr>
-                        <td><?php echo $pais['id_country']; ?></td>
-                        <td><?php echo $pais['name_country']; ?></td>
+                        <td><?php echo $pais['idPais']; ?></td>
+                        <td><?php echo $pais['nombrePais']; ?></td>
                         <td>
                             <button type="button" class="btn btn-danger btn-abrir-modal">-</button>
                             <button type="button" class="btn btn-primary btn-editar-modal">E</button>
@@ -72,9 +72,9 @@ function setIdCountry($id)
                     <div class="card-body">
                         <h3>Edicion de paises</h3>
                         <form id="frmUpdateData">
-                            <input id="id_country" name="id_country" type="hidden" value="0">
+                            <input id="idPais" name="idPais" type="hidden" value="0">
                             Nombre del Pais <h6><span class="badge bg-primary"></span></h6>
-                            <input type="text" name="name_country">
+                            <input type="text" name="nombrePais">
                             <button type="button" class="btn btn-primary" onclick="editarData()" data-bs-dismiss="modal">Editar</button>
                         </form>
                     </div>
@@ -90,7 +90,7 @@ function setIdCountry($id)
 <script src="js/DataTables/datatables.min.js"></script>
 <script>
     var row;
-    let idCountryBorrar;
+    let idPaisBorrar;
     $('#miTabla').DataTable().destroy();
     $(document).ready(function() {
         var tabla = $('#misPaises').DataTable();
@@ -99,7 +99,7 @@ function setIdCountry($id)
         $('#misPaises tbody').on('click', '.btn-abrir-modal', function() {
             row = tabla.row($(this).parents('tr'));
             var fila = tabla.row($(this).closest('tr')).data();
-            idCountryBorrar = fila[0]; // Obtener el valor de la columna 'Nombre'
+            idPaisBorrar = fila[0]; // Obtener el valor de la columna 'Nombre'
 
             // Abrir el modal y mostrar el nombre del usuario
             abrirModal(fila[0], fila[1]);
@@ -109,9 +109,9 @@ function setIdCountry($id)
             const inputsData = new FormData(frm);
             row = tabla.row($(this).parents('tr'));
             var fila = tabla.row($(this).closest('tr')).data();
-            idCountryBorrar = fila[0]; // Obtener el valor de la columna 'Nombre'
-            inputsData.set("id_country",fila[0]);
-            inputsData.set("name_country",fila[1]);
+            idPaisBorrar = fila[0]; // Obtener el valor de la columna 'Nombre'
+            inputsData.set("idPais",fila[0]);
+            inputsData.set("nombrePais",fila[1]);
             document.querySelector('.badge').innerHTML = fila[0];
             // Itera a través de los pares clave-valor de los datos
             for (var pair of inputsData.entries()) {
@@ -133,7 +133,7 @@ function setIdCountry($id)
     }
 
     function borrarDataDb() {
-        fetch('controllers/Country/delete_data.php?id=' + idCountryBorrar, {
+        fetch('controllers/Country/delete_data.php?id=' + idPaisBorrar, {
                 method: 'DELETE'
             })
             .then(response => {
